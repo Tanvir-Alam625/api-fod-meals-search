@@ -15,19 +15,19 @@ const searchMeals = async ()=>{
     const res = await fetch(apiUrl);
     const data = await res.json();
     getMeals(data.meals);
+    console.log(data);
     }
+
 }
 const getMeals= meals =>{
     // console.log(meals);
     container.innerHTML = "";
     foodDetails.innerHTML = "";
     const empty = document.getElementById('empty');
-    console.log(empty);
-    console.log(meals);
-
-    // if(meals.length == null){
-    //     empty.innerText = "Your Food Is not Available!";
-    // }
+    // console.log(empty);
+    // console.log(typeof meals);
+    try{
+        empty.innerText= "";
         meals.forEach(meal => {
             const div = document.createElement('div');
             div.classList.add('col');
@@ -51,6 +51,15 @@ const getMeals= meals =>{
             `;
             container.appendChild(div);
         });
+    }catch(error){
+        empty.innerText = "Your Food Is not Available!";
+        console.log('i am in');
+    }
+    // if(meals.length == 0){
+    //     empty.innerText = "Your Food Is not Available!";
+    //     console.log('i am in');
+    // }
+      
     
 }
 // get food details function 
@@ -77,5 +86,5 @@ const getDetails = (detail)=>{
     `;
     foodDetails.appendChild(detailDiv);
     container.innerHTML = ''
-    console.log(detail);
+    // console.log(detail);
 }
