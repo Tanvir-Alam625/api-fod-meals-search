@@ -23,14 +23,43 @@ const getMeals= meals =>{
             <div class="card-body">
                     <h5 class="card-title">${meal.strMeal}</h5>
                     <p class="card-text">${desConvert}</p>
+                    <div class= "row  row-cols-md-2 g-2">
                     <a href="${meal.strSource}" target ="_blank">
-                        <button type="button" class="btn btn-outline-primary">See More</button>
+                        <button type="button" class="btn btn-outline-primary">Order Now</button>
                     </a>
-                    
+                    <button onclick="details(${meal.idMeal})" type="button" class="btn btn-outline-primary">See Details</button>
+                    </div>
+   
             </div>
         </div>
-        `
+        `;
         container.appendChild(div);
     });
-    console.log(meals);
+}
+// get food details function 
+const details=(meals)=>{
+    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meals}`;
+    fetch(url)
+    .then(res=> res.json())
+    .then(data=> getDetails(data.meals[0]))
+    // console.log(url);
+}
+const getDetails = (detail)=>{
+    const details = document.getElementById('items-details');
+    const detailDiv = document.createElement('div');
+    detailDiv.classList.add('card');
+    const des = detail.strInstructions;
+        const desConvert= des.slice(0, 200);
+    detailDiv.innerHTML = `
+                <img src="${detail.strMealThumb}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">${detail.strMeal}</h5>
+                  <p class="card-text">${desConvert}</p>
+                  <a href="${detail.strSource}" target ="_blank">
+                        <button type="button" class="btn btn-outline-primary">Order Now</button>
+                    </a>
+                </div>
+    `;
+    details.appendChild(detailDiv);
+    console.log(detail);
 }
