@@ -23,7 +23,10 @@ const getMeals= meals =>{
             <div class="card-body">
                     <h5 class="card-title">${meal.strMeal}</h5>
                     <p class="card-text">${desConvert}</p>
-                    <button type="button" class="btn btn-outline-primary">See More</button>
+                    <a href="${meal.strSource}" target ="_blank">
+                        <button type="button" class="btn btn-outline-primary">See More</button>
+                    </a>
+                    
             </div>
         </div>
         `
