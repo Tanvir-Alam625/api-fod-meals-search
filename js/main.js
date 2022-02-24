@@ -2,7 +2,7 @@ const container = document.getElementById('search-result');
 const foodDetails = document.getElementById('items-details');
 
 // click function 
-const searchMeals = ()=>{
+const searchMeals = async ()=>{
     const field = document.getElementById('search-field')
     const fieldValue = field.value;
     const error  = document.getElementById('error-message');
@@ -12,9 +12,9 @@ const searchMeals = ()=>{
     field.value = "";
     error.innerText ="";
     const apiUrl = `https://themealdb.com/api/json/v1/1/search.php?s=${fieldValue}`;
-    fetch(apiUrl)
-    .then(response => response.json())
-    .then(data => getMeals(data.meals))
+    const res = await fetch(apiUrl);
+    const data = await res.json();
+    getMeals(data.meals);
     }
 }
 const getMeals= meals =>{
@@ -54,12 +54,11 @@ const getMeals= meals =>{
     
 }
 // get food details function 
-const details=(meals)=>{
+const details= async (meals)=>{
     const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meals}`;
-    fetch(url)
-    .then(res=> res.json())
-    .then(data=> getDetails(data.meals[0]))
-    // console.log(url);
+    const res = await fetch(url);
+    const data = await res.json();
+    getDetails(data.meals[0]);
 }
 const getDetails = (detail)=>{
     const detailDiv = document.createElement('div');
