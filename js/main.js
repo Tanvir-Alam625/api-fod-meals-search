@@ -1,4 +1,6 @@
 const container = document.getElementById('search-result');
+const foodDetails = document.getElementById('items-details');
+
 // click function 
 const searchMeals = ()=>{
     const field = document.getElementById('search-field')
@@ -12,6 +14,7 @@ const searchMeals = ()=>{
 const getMeals= meals =>{
     // console.log(meals);
     container.innerHTML = "";
+    foodDetails.innerHTML = "";
     meals.forEach(meal => {
         const div = document.createElement('div');
         div.classList.add('col');
@@ -45,7 +48,6 @@ const details=(meals)=>{
     // console.log(url);
 }
 const getDetails = (detail)=>{
-    const details = document.getElementById('items-details');
     const detailDiv = document.createElement('div');
     detailDiv.classList.add('card');
     const des = detail.strInstructions;
@@ -60,6 +62,7 @@ const getDetails = (detail)=>{
                     </a>
                 </div>
     `;
-    details.appendChild(detailDiv);
+    foodDetails.appendChild(detailDiv);
+    container.innerHTML = ''
     console.log(detail);
 }
