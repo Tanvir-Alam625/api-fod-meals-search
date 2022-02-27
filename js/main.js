@@ -9,25 +9,25 @@ const searchMeals = async ()=>{
     if(field.value ==""){
         error.innerText = "Please Enter your Food items";
     }else{
-    field.value = "";
-    error.innerText ="";
-    const apiUrl = `https://themealdb.com/api/json/v1/1/search.php?s=${fieldValue}`;
-    const res = await fetch(apiUrl);
-    const data = await res.json();
-    getMeals(data.meals);
-    console.log(data);
+        document.getElementById('loader').style.display = 'block';
+        field.value = "";
+        error.innerText ="";
+        const apiUrl = `https://themealdb.com/api/json/v1/1/search.php?s=${fieldValue}`;
+        const res = await fetch(apiUrl);
+        const data = await res.json();
+        getMeals(data.meals);
+        console.log(data);
     }
 
 }
 const getMeals= meals =>{
-    // console.log(meals);
     container.innerHTML = "";
     foodDetails.innerHTML = "";
     const empty = document.getElementById('empty');
-    // console.log(empty);
-    // console.log(typeof meals);
+    document.getElementById('loader').style.display = 'none';
     try{
         empty.innerText= "";
+        
         meals.forEach(meal => {
             const div = document.createElement('div');
             div.classList.add('col');
@@ -64,16 +64,18 @@ const getMeals= meals =>{
 }
 // get food details function 
 const details= async (meals)=>{
+    document.getElementById('loader').style.display = 'block';
     const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meals}`;
     const res = await fetch(url);
     const data = await res.json();
     getDetails(data.meals[0]);
 }
 const getDetails = (detail)=>{
+    document.getElementById('loader').style.display = 'none';
     const detailDiv = document.createElement('div');
     detailDiv.classList.add('card');
     const des = detail.strInstructions;
-        const desConvert= des.slice(0, 200);
+    const desConvert= des.slice(0, 200);
     detailDiv.innerHTML = `
                 <img src="${detail.strMealThumb}" class="card-img-top" alt="...">
                 <div class="card-body">

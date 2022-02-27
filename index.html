@@ -14,7 +14,17 @@
             color: rgba(144, 238, 207, 0.575);
             text-align: center;
         }
-
+        .sniper-container{
+            width: 100%;
+            display: flex;
+            position: absolute;
+            justify-content: center;
+            align-items: center;
+        }
+        #loader{
+            display: none;
+            z-index: 99;
+        }
     </style>
 </head>
 <body>
@@ -38,6 +48,9 @@
          </div>
         <!-- search result  -->
         <h2 id="empty" class="empty"></h2>
+        <div class="sniper-container">
+            <img width="150"  id="loader" src="./image/e439272bf16c2df6b43e480de9fb1810_w200.gif" alt="">
+        </div>
         <div id="search-result" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mx-2">
           </div>
     </main>
